@@ -5,12 +5,10 @@ plugins {
 group 'ru.netology'
 version '1.0-SNAPSHOT'
 
-// используем 11 версию языка
 java {
     sourceCompatibility = 11
 }
 
-// кодировка файлов (если используете русский язык в файлах)
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
@@ -22,11 +20,18 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testImplementation 'com.codeborne:selenide:6.19.1'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
-    testCompileOnly 'org.projectloombok:1.18.36'
+
+
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
-    testImplementation 'org.slf4j:slf4j-simple:2.0.3' //логи
+
+    //  для логирования
+    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
 }
+
 test {
     useJUnitPlatform()
-    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless', 'true')
 }
